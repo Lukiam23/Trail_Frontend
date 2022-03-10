@@ -9,8 +9,11 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-        width: 200px;
+        width: 242px;
         background: #eee;
+        padding-left: 82px;
+        background-position: 25px center;
+        background-repeat: no-repeat;
       }
 
       .msgBox p {
@@ -35,7 +38,8 @@
     <button>Display message box</button>
 
     <script>
-        function displayMessage() {
+        const btn = document.querySelector('button');
+        function displayMessage(msgText, msgType) {
             const body = document.body;
 
             const panel = document.createElement('div');
@@ -43,16 +47,27 @@
             body.appendChild(panel);
 
             const msg = document.createElement('p');
-            msg.textContent = 'This is a message box';
+            msg.textContent = msgText;
             panel.appendChild(msg);
 
             const closeBtn = document.createElement('button');
             closeBtn.textContent = 'x';
             panel.appendChild(closeBtn);
 
+            if (msgType === 'warning') {
+                msg.style.backgroundImage = 'url(icons/warning.png)';
+                panel.style.backgroundColor = 'red';
+            } else if (msgType === 'chat') {
+                msg.style.backgroundImage = 'url(icons/chat.png)';
+                panel.style.backgroundColor = 'aqua';
+            } else {
+                msg.style.paddingLeft = '20px';
+            }
+
             closeBtn.addEventListener('click', () => panel.parentNode.removeChild(panel));
         }
 
+        btn.addEventListener('click', () => displayMessage('Brian: Hi there, how are you today?','chat'));
         
     </script>
   </body>
